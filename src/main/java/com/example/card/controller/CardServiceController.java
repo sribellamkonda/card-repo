@@ -20,8 +20,18 @@ public class CardServiceController {
 
     @GetMapping
     public ResponseEntity<List<String>> getCards() {
-        return new ResponseEntity<>(List.of("4234123412341234", "4100123412341234"), HttpStatus.OK);
+        return new ResponseEntity<>(List.of("340000000000012", "6011000000001111", "2221000000000000",
+                "4026000000000000"), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{brand}")
+    public ResponseEntity<List<String>> getCards(@PathVariable String brand) {
+        if ("mc".equals(brand)) {
+            return new ResponseEntity<>(List.of("2221000000000000", "2720000000000001"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(List.of("Invalid Brand"), HttpStatus.BAD_REQUEST);
+    }
+
 
     @PostMapping
     public ResponseEntity<String> save(final @Valid @RequestBody CardInfo cardInfo) {
